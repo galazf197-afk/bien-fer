@@ -1,3 +1,4 @@
+#CLASE 2
 compras=(12000,85000,45000,92000,15000)
 #El bucle recorre "cada registro"
 for monto in compras:

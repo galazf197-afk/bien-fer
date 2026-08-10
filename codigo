@@ -1,0 +1,7 @@
+compras=(12000,85000,45000,92000,15000)
+#El bucle recorre "cada registro"
+for monto in compras:
+    if monto > 50000:
+        print(f"compra de {monto}: clasificación: -> venta grande")
+    else:
+        print(f"compra de {monto}: clasificación: -> venta pequeña")

@@ -1,184 +1,51 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": [],
-      "authorship_tag": "ABX9TyOyIvBEbgN3v7/W3o0rXl0A",
-      "include_colab_link": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/galazf197-afk/bien-fer/blob/main/CODIGO%20TALLER%202\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": null,
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "aUCtMgXwHN6X",
-        "outputId": "8c851f7b-e86e-41cc-848b-489e675e61d7"
-      },
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "resultados del analisis Andeslog\n",
-            "Pedidos válidos procesados: 3\n",
-            "Suma total de montos: $70,000\n",
-            "Promedio de monto por pedido válido: $23,333.33\n",
-            "Pedidos con monto superior al umbral ($20,000): 2\n",
-            "Total de pedidos atrasados: 2\n",
-            "Total de pedidos en sucursal Norte: 2\n"
-          ]
-        }
-      ],
-      "source": [
-        "# TALLER 02: CASO ANDESLOG\n",
-        "# ==========================================\n",
-        "\n",
-        "# 1. Definir constante del Umbral\n",
-        "UMBRAL = 20_000\n",
-        "\n",
-        "# 2. Datos de entrada (Lista de diccionarios)\n",
-        "pedidos = [\n",
-        "    {\"id\": 101, \"sucursal\": \"Norte\", \"monto\": 15000, \"atrasado\": False},\n",
-        "    {\"id\": 102, \"sucursal\": \"Sur\", \"monto\": 25000, \"atrasado\": True},\n",
-        "    {\"id\": 103, \"sucursal\": \"Norte\", \"monto\": None, \"atrasado\": False},  # Registro con dato ausente\n",
-        "    {\"id\": 104, \"sucursal\": \"Centro\", \"monto\": 30000, \"atrasado\": True}\n",
-        "]\n",
-        "\n",
-        "# 3. Inicializar contadores y acumuladores\n",
-        "cantidad_validos = 0\n",
-        "total_montos = 0\n",
-        "conteo_sobre_umbral = 0\n",
-        "\n",
-        "# Variables adicionales (\"Ahora inténtalo tú\")\n",
-        "pedidos_atrasados = 0\n",
-        "pedidos_norte = 0\n",
-        "\n",
-        "# 4. Bucle para procesar cada pedido\n",
-        "for pedido in pedidos:\n",
-        "    # Conteo por sucursal Norte\n",
-        "    if pedido[\"sucursal\"] == \"Norte\":\n",
-        "        pedidos_norte += 1\n",
-        "\n",
-        "    # Conteo de pedidos atrasados\n",
-        "    if pedido[\"atrasado\"]:\n",
-        "        pedidos_atrasados += 1\n",
-        "\n",
-        "    if pedido[\"monto\"] is None:\n",
-        "        continue\n",
-        "\n",
-        "    cantidad_validos += 1\n",
-        "    total_montos += pedido[\"monto\"]\n",
-        "\n",
-        "\n",
-        "    if pedido[\"monto\"] > UMBRAL:\n",
-        "        conteo_sobre_umbral += 1\n",
-        "\n",
-        "\n",
-        "promedio = total_montos / cantidad_validos if cantidad_validos > 0 else 0\n",
-        "\n",
-        "print (\"resultados del analisis Andeslog\")\n",
-        "print(f\"Pedidos válidos procesados: {cantidad_validos}\")\n",
-        "print(f\"Suma total de montos: ${total_montos:,.0f}\")\n",
-        "print(f\"Promedio de monto por pedido válido: ${promedio:,.2f}\")\n",
-        "print(f\"Pedidos con monto superior al umbral (${UMBRAL:,}): {conteo_sobre_umbral}\")\n",
-        "print(f\"Total de pedidos atrasados: {pedidos_atrasados}\")\n",
-        "print(f\"Total de pedidos en sucursal Norte: {pedidos_norte}\")"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "\n",
-        "# Taller 2: Fundamentos de Python para Ciencia de Datos (Caso AndesLog)\n",
-        "# ==============================================================================\n",
-        "\n",
-        "# Definir la variable UMBRAL (constante para parametrizar la regla de negocio)\n",
-        "UMBRAL = 20_000\n",
-        "\n",
-        "#Crear la lista de diccionarios'pedidos'\n",
-        "pedidos = [\n",
-        "    {\"id\": 1, \"sucursal\": \"Norte\", \"monto\": 125000, \"atrasado\": False},\n",
-        "    {\"id\": 2, \"sucursal\": \"Centro\", \"monto\": 18000, \"atrasado\": True},\n",
-        "    {\"id\": 3, \"sucursal\": \"Sur\", \"monto\": 52000, \"atrasado\": False},\n",
-        "    {\"id\": 4, \"sucursal\": \"Norte\", \"monto\": None, \"atrasado\": True},\n",
-        "]\n",
-        "\n",
-        "# Crear acumuladores (inicializados antes del bucle)\n",
-        "cantidad_validos = 0\n",
-        "total_montos = 0\n",
-        "conteo_sobre_umbral = 0\n",
-        "\n",
-        "# Recorrer los pedidos con bucle for\n",
-        "for pedido in pedidos:\n",
-        "    monto = pedido[\"monto\"]\n",
-        "\n",
-        "    #Condición para detectar monto ausente (None) y omitirlo\n",
-        "    if monto is None:\n",
-        "        continue  # Omite registros incompletos sin eliminarlos\n",
-        "\n",
-        "    # Aplicar operadores y condicionales para acumular datos válidos\n",
-        "    cantidad_validos += 1\n",
-        "    total_montos += monto\n",
-        "\n",
-        "    if monto > UMBRAL:\n",
-        "        conteo_sobre_umbral += 1\n",
-        "\n",
-        "#  Calcular el promedio de los montos válidos\n",
-        "if cantidad_validos > 0:\n",
-        "    promedio = total_montos / cantidad_validos\n",
-        "else:\n",
-        "    promedio = 0.0\n",
-        "\n",
-        "# Mostrar resultados en consola\n",
-        "print(\"----- RESULTADOS CASO ANDESLOG -----\")\n",
-        "print(\"Cantidad válida:\", cantidad_validos)\n",
-        "print(\"Total:\", total_montos)\n",
-        "print(\"Promedio:\", promedio)\n",
-        "print(\"Sobre el umbral 20000:\", conteo_sobre_umbral)"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "SyDQy7vVIb5G",
-        "outputId": "f33f923c-5700-4bb1-a316-1cd64e9581a3"
-      },
-      "execution_count": 3,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "----- RESULTADOS CASO ANDESLOG -----\n",
-            "Cantidad válida: 3\n",
-            "Total: 195000\n",
-            "Promedio: 65000.0\n",
-            "Sobre el umbral 20000: 2\n"
-          ]
-        }
-      ]
-    }
-  ]
-}
+# Script base completo del Taller 2
+UMBRAL = 40000
+
+#Cada elemento representa un pedido con su ID, sucursal, monto y estado de entrega.
+pedidos = [ 
+    {"id": 1, "sucursal": "Norte", "monto": 12500, "atrasado": False}, 
+    {"id": 2, "sucursal": "Centro", "monto": 18000, "atrasado": True}, 
+    {"id": 3, "sucursal": "Sur", "monto": 52000, "atrasado": False}, 
+    {"id": 4, "sucursal": "Norte", "monto": None, "atrasado": True},
+    {"id": 5, "sucursal": "Londres", "monto":1000, "atrasado": False},
+]
+# Deben definirse con valor cero antes de iniciar el ciclo de lectura.
+cantidad_validos = 0
+total_montos = 0 #wena wena watong
+conteo_sobre_umbral = 0
+pedidos_atrasados = 0
+cuenta_sucursales= 0
+
+#Lista de pedidos
+for pedido in pedidos:
+    # Extracción de la variable 'monto' 
+    monto = pedido["monto"]
+
+    #validación de monto nulo
+    if monto is None:
+        continue
+        
+    cantidad_validos += 1
+    total_montos += monto
+
+    #comparación con el umbral
+    if monto > UMBRAL:
+        conteo_sobre_umbral += 1 
+
+
+    if pedido["atrasado"] == False:
+        pedidos_atrasados += 1 
+
+    if pedido["sucursal"] == "Norte":
+        cuenta_sucursales += 1
+
+#calculo del promedio
+promedio = total_montos / cantidad_validos
+
+#resultados
+print("Cantidad válida:", cantidad_validos)
+print("Total:", total_montos)
+print("Promedio:", promedio)
+print("Sobre el umbral 40000:", conteo_sobre_umbral)
+print("Atrasados:", pedidos_atrasados)
+print("Sucursales en el Norte:", cuenta_sucursales)
